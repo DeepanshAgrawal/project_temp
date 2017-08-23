@@ -5,5 +5,6 @@ from . import views
 app_name = 'login'
 
 urlpatterns = [
-    url('^$', views.FormView.as_view(), name='login'),
+    url(r'^$', views.FormView.as_view(), name='login'),
+    url(r'^sign/$', views.SignUp.as_view(), name='sign'),
 ]

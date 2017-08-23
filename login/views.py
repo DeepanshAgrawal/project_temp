@@ -13,13 +13,35 @@ class FormView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        usr = authenticate(username=username, password=password)
+        if usr is not None:
+            return redirect('basic:index')
+        else:
+            return render(request, 'login_form.html', {'message': "Either username or password is not valid"})
+
+
+class SignUp(View):
+    form_class = UserForm
+    template_name = 'signup.html'
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
         form = self.form_class(request.POST)
+        again = request.POST['again']
 
         if form.is_valid():
             user = form.save(commit=False)
 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+
+            if again != password:
+                return render(request, 'signup.html', {'message': "password fields don't match"})
 
             user.set_password(password)
 
@@ -31,8 +53,8 @@ class FormView(View):
                     login(request, user)
                     return redirect('basic:index')
                 else:
-                    return render(request, 'login_form.html', {'message': "user not active"})
+                    return render(request, 'signup.html', {'message': "user not active"})
             else:
-                return render(request, 'login_form.html', {'message': "user is not authenticated"})
+                return render(request, 'signup.html', {'message': "user is not authenticated"})
         else:
-            return render(request, 'login_form.html', {'message': "form not valid"})
+            return render(request, 'signup.html', {'message': "username already exist"})
