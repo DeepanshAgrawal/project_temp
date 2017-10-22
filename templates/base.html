@@ -5,46 +5,36 @@
     <title>ShelfLife</title>
     {% load staticfiles %}
     <link rel="icon" type="image/plain" href="{% static 'icon.png' %}">
-    <script src="{% static 'jquery/jquery-3.2.1.js' %}"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{% block title %}{% endblock %}</title>
+
+	<link rel="stylesheet" href="{% static 'assets/form-login.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/form-register.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/form-search.css' %}">
     <link rel="stylesheet" href="{% static 'dist/css/bootstrap.css' %}">
-    <script src="{% static 'dist/js/bootstrap.js' %}"></script>
-    <script src="{% static 'own.js' %}"></script>
-    <style>
-        .panel-footer {
-            position: fixed;
-            height: 50px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            margin-bottom: 0px;
-        }
-    </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'basic:index' %}">ShelfLife</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Shelf</a></li>
-                <li><a href="#">Profile</a></li>
-            </ul>
-            <form class="navbar-form navbar-right" method="get" action="#">
-                <div class="form-group">
-                    <input name="q" class="form-control" placeholder="Search Here">
-                </div>
-                <a class="btn btn-primary btn-md" href="#">Search</a>
-             </form>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: 20px">
+        <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'basic:index'%}">ShelfLife</a>
+        </div>
         </div>
     </nav>
-    <div class="container">
+    <div style="margin-top: 80px" class="container">
     {% block body %}
     {% endblock %}
     </div>
-    <div class="panel-footer">
-        <p id="date"></p>
-    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">© ShelfLife- All rights reserved</a>
+        </div>
+        </div>
+    </nav>
+    <script src="{% static 'dist/js/bootstrap.js' %}"></script>
 </body>
 </html>

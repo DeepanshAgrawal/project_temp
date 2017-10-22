@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="main-content">
+
+        <!-- You only need this form and the form-search.css -->
+
+        <form class="form-search" method="post" action="{% url 'basic:query' %}">
+            {% csrf_token %}
+            <input type="search" name="query" value="{{ value }}" placeholder="I am looking for..">
+            <button type="submit">Search</button>
+            <i class="fa fa-search"></i>
+        </form>
+    </div>
+    {% for i in get %}
+    <div class="jumbotron">
+        <center><h1><strong>{{ i }}</strong></h1></center>
+    </div>
+    {% endfor %}
+{% endblock %}
+{% block title %}
+    Search
+{% endblock %}

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 
 class FormView(View):
     form_class = UserForm
-    template_name = 'login_form.html'
+    template_name = 'form-login.html'
 
     def get(self, request):
         form = self.form_class(None)
@@ -17,14 +17,15 @@ class FormView(View):
         password = request.POST['password']
         usr = authenticate(username=username, password=password)
         if usr is not None:
+            login(request, usr)
             return redirect('basic:index')
         else:
-            return render(request, 'login_form.html', {'message': "Either username or password is not valid"})
+            return render(request, 'form-login.html', {'message': "Either username or password is not valid"})
 
 
 class SignUp(View):
     form_class = UserForm
-    template_name = 'signup.html'
+    template_name = 'form-register.html'
 
     def get(self, request):
         form = self.form_class(None)
@@ -41,7 +42,7 @@ class SignUp(View):
             password = form.cleaned_data['password']
 
             if again != password:
-                return render(request, 'signup.html', {'message': "password fields don't match"})
+                return render(request, 'form-register.html', {'message': "password fields don't match"})
 
             user.set_password(password)
 
@@ -53,8 +54,8 @@ class SignUp(View):
                     login(request, user)
                     return redirect('basic:index')
                 else:
-                    return render(request, 'signup.html', {'message': "user not active"})
+                    return render(request, 'form-register.html', {'message': "user not active"})
             else:
-                return render(request, 'signup.html', {'message': "user is not authenticated"})
+                return render(request, 'form-register.html', {'message': "user is not authenticated"})
         else:
-            return render(request, 'signup.html', {'message': "username already exist"})
+            return render(request, 'form-register.html', {'message': "username already exist"})
