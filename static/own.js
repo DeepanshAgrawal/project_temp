@@ -7,7 +7,12 @@ var pad = 0;
     document.getElementById('date').innerHTML = 'Server Time : ' + new Date();
 }, 1);
 */
-function srch() {
-    console.log('sumbit');
-    document.getElementById('content').submit()
+function messag() {
+    var dialog = document.getElementById('message-window');
+    dialog.show();
+}
+
+function close() {
+    var dialog = document.getElementById('message-window');
+    dialog.show();
 }

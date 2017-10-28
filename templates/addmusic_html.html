@@ -154,7 +154,7 @@ background-position:center center;
 
 <div class="in">
 <div id="frm" style="margin-top: 9%;" class="bg-form">
-  <form method="post">
+  <form method="post" action="{% url 'basic:addmusic' %}" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
 	<br><input type="submit" value="Submit">

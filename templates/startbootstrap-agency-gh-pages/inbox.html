@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Inbox
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Sender</th>
+                <th>Message</th>
+                <th>Time</th>
+            </tr>
+            {% if message %}
+                {% for i in message %}
+                    <tr>
+                        <td>{{ i.sender }}</td>
+                        <td>{{ i.message_text }}</td>
+                        <td>{{ i.message_date }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <div style="text-align: center;"><p>No messages yet</p></div>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}

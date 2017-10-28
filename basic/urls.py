@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^search/$', views.search, name='query'),
     url(r'^logout/$', views.logOut, name='logout'),
     url(r'^feedback/$', views.feed, name='feed'),
-    url(r'^addmusic/$',views.addmusic,name='addmusic'),
-    url(r'^addmovie/$',views.addmovie,name='addmovie')
+    url(r'^addmusic/$',views.addobject,name='addmusic'),
+    url(r'^addmovie/$',views.addobject,name='addmovie'),
+    url(r'^message/$', views.addobject, name='message'),
+    url(r'^inbox/$', views.inbox, name='inbox'),
 ]
